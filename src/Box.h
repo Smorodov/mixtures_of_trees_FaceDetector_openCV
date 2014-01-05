@@ -14,7 +14,7 @@ public:
 	float s;
 	float c;
 	Mat xy;
-	double level;
+	float level;
 	Box(void);
 	~Box(void);
 };

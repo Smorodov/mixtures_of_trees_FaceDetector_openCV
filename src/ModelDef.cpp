@@ -56,7 +56,7 @@ Mat ModelDef::Load2DMatrix(string filename)
 
 int ModelDef::ReadInt(string filename)
 {
-	int I;
+	float I;
 	ifstream ifs(filename);
 	if (ifs.is_open())
 	{

@@ -67,7 +67,7 @@ vector<Mat> ModelFilter::Load3DMatrix(string filename)
 
 int ModelFilter::ReadInt(string filename)
 {
-	int I;
+	float I;
 	ifstream ifs(filename);
 	if (ifs.is_open())
 	{

@@ -91,7 +91,7 @@ void visualizemodel(Model model,size_t comp_id_beg,size_t comp_id_end)
 		}
 
 		imshow("im",im_color);
-		cv::waitKey(0);
+		cv::waitKey(50);
 	}
 }
 

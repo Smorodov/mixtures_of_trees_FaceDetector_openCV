@@ -25,7 +25,7 @@ private:
 public:
 	std::string dir;
 	ModelComponent::ModelComponent(size_t n,string ModelDir);
-
+	ModelComponent::ModelComponent();
 	ModelComponent::~ModelComponent();
 
 	class item

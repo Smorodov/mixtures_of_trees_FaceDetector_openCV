@@ -56,7 +56,7 @@ Model::Model(string model_dir,size_t n_components,size_t n_filters,size_t n_defs
 }
 int Model::ReadInt(string filename)
 {
-	int I;
+	float I;
 	ifstream ifs(filename);
 	if (ifs.is_open())
 	{
