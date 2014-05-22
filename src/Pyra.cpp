@@ -10,13 +10,14 @@ Pyra::Pyra()
 
 Pyra::Pyra(Mat& im,Model model)
 {
+	
 	interval=model.interval;
 	int sbin=model.sbin;
 	padx=MAX(model.maxsize.width-1-1,0);
 	pady=MAX(model.maxsize.height-1-1,0);
 	float sc=pow(2.0f,1.0f/(float)interval);
 
-	float max_scale=1.0f+floor(log(MIN(im.rows,im.cols)/(5.0f*(float)sbin))/log(sc));
+	float max_scale=1.0f+floor(log((float)MIN(im.rows,im.cols)/(5.0f*(float)sbin))/log(sc));
 	feat.resize(max_scale+interval);
 	scale.resize(max_scale+interval);
 
@@ -32,6 +33,7 @@ Pyra::Pyra(Mat& im,Model model)
 		scale[i]=2.0/pow(sc,i);
 		feat[i+interval]=features(scaled,sbin);
 		scale[i+interval]=1.0/pow(sc,i);
+		
 		for (int j=i+interval;j<max_scale;j+=interval)
 		{
 			resize(scaled,scaled,Size(scaled.cols/2,scaled.rows/2));
@@ -48,11 +50,11 @@ Pyra::Pyra(Mat& im,Model model)
 	for (int i=0;i<feat.size();++i)
 	{
 		int e=feat[i].size()-1;
-		for (int j=0;j<feat.size()-1;++j)
+		for (int j=0;j<feat[i].size()-1;++j)
 		{
 			copyMakeBorder( feat[i][j], feat[i][j], top, bottom, left, right, BORDER_CONSTANT,cv::Scalar(0,0,0,0) );
 		}
-		copyMakeBorder( feat[i][e], feat[i][e], top, bottom, left, right, BORDER_CONSTANT,cv::Scalar(1,1,1,1) );
+			copyMakeBorder( feat[i][e], feat[i][e], top, bottom, left, right, BORDER_CONSTANT,cv::Scalar(1,1,1,1) );		
 	}
 
 	for (int i=0;i<scale.size();++i)

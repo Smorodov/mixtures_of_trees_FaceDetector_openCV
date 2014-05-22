@@ -66,6 +66,7 @@ vector<Mat> features(Mat& img,int sbin)
 
 	size_t feat_len=out[0]*out[1]*out[2];
 	float* feat=new float[feat_len];
+	memset(feat,0,out[0]*out[1]*out[2]*sizeof(float));
 
 	featMat.clear();
 	featMat.resize(out[2],Mat::zeros(out[0],out[1],CV_32FC1)); 
@@ -194,6 +195,7 @@ vector<Mat> features(Mat& img,int sbin)
 
 			for (int o = 0; o < 18; o++)
 			{
+				float tmp=*src;
 				float h1 = min(*src * n1, 0.2);
 				float h2 = min(*src * n2, 0.2);
 				float h3 = min(*src * n3, 0.2);
@@ -229,23 +231,26 @@ vector<Mat> features(Mat& img,int sbin)
 			*dst = 0.2357 * t4;
 			// truncation feature
 			dst += out[0]*out[1];
-			*dst = 0;
+
 		}
 	}
 	delete[] hist;
 	delete[] norm;
 	delete[] im;
 
+	int ind=0;
 	for (int k=0;k<out[2];++k)
 	{
 		for (int j=0;j<out[1];++j)
 		{
 			for (int i=0;i<out[0];++i)
 			{
-				featMat[k].at<float>(i,j)=feat[k*out[0]*out[1]+j*out[0]+i];
+				featMat[k].at<float>(i,j)=feat[/*k*out[0]*out[1]+j*out[0]+i*/ ind];
+				++ind;
 			}
 		}
 	}
+
 	delete []feat;
 	return featMat;
 }
